@@ -102,6 +102,36 @@
   --container-padding: var(--space-4);
 }
 
+/* === LIGHT THEME === */
+[data-theme="light"] {
+  /* Background Layers */
+  --color-bg-base: #F2F2F7;
+  --color-bg-elevated: #FFFFFF;
+  --color-bg-surface: #E5E5EA;
+  --color-bg-hover: #D1D1D6;
+
+  /* Text */
+  --color-text-primary: #000000;
+  --color-text-secondary: #3C3C43;
+  --color-text-tertiary: #8E8E93;
+  --color-text-inverse: #FFFFFF;
+
+  /* Suits (spades/clubs darker for contrast) */
+  --color-suit-spades: #000000;
+  --color-suit-clubs: #000000;
+
+  /* Borders */
+  --color-border-subtle: rgba(0, 0, 0, 0.08);
+  --color-border-medium: rgba(0, 0, 0, 0.15);
+  --color-border-strong: rgba(0, 0, 0, 0.25);
+
+  /* Shadows (lighter) */
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08);
+  --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1), 0 2px 4px rgba(0, 0, 0, 0.08);
+  --shadow-lg: 0 10px 20px rgba(0, 0, 0, 0.15), 0 6px 6px rgba(0, 0, 0, 0.1);
+  --shadow-xl: 0 20px 40px rgba(0, 0, 0, 0.2), 0 15px 12px rgba(0, 0, 0, 0.1);
+}
+
 /* === REDUCED MOTION === */
 @media (prefers-reduced-motion: reduce) {
   *,

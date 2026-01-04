@@ -5,7 +5,14 @@ import { WorkoutScreen } from '@/screens/WorkoutScreen';
 import { WorkoutCompleteScreen } from '@/screens/WorkoutCompleteScreen';
 import { HistoryScreen } from '@/screens/HistoryScreen';
 import { SettingsScreen } from '@/screens/SettingsScreen';
-import { createWorkout, endWorkoutEarly, getWorkoutSummary } from '@/lib/workout';
+import {
+  createWorkout,
+  endWorkoutEarly,
+  getWorkoutSummary,
+  saveInProgressWorkout,
+  loadInProgressWorkout,
+  clearInProgressWorkout,
+} from '@/lib/workout';
 import {
   loadSettings,
   saveSettings,
@@ -35,6 +42,17 @@ export function App() {
   const [workoutSummary, setWorkoutSummary] = useState<WorkoutSummary | null>(null);
   const [settings, setSettings] = useState<Settings>(() => loadSettings());
   const [history, setHistory] = useState<WorkoutHistory>(() => loadHistory());
+  const [showResumePrompt, setShowResumePrompt] = useState(false);
+  const [savedWorkout, setSavedWorkout] = useState<WorkoutState | null>(null);
+
+  // Check for in-progress workout on mount
+  useEffect(() => {
+    const saved = loadInProgressWorkout();
+    if (saved) {
+      setSavedWorkout(saved);
+      setShowResumePrompt(true);
+    }
+  }, []);
 
   // Persist settings
   useEffect(() => {
@@ -45,6 +63,35 @@ export function App() {
   useEffect(() => {
     saveHistory(history);
   }, [history]);
+
+  // Apply theme
+  useEffect(() => {
+    document.documentElement.setAttribute('data-theme', settings.theme);
+  }, [settings.theme]);
+
+  // Persist workout whenever it changes
+  useEffect(() => {
+    if (workout) {
+      saveInProgressWorkout(workout);
+    }
+  }, [workout]);
+
+  // Handle resume prompt
+  const handleResumeWorkout = () => {
+    if (savedWorkout) {
+      setWorkout(savedWorkout);
+      setSelectedDeck(savedWorkout.deckType);
+      setCurrentScreen('workout');
+    }
+    setShowResumePrompt(false);
+    setSavedWorkout(null);
+  };
+
+  const handleDiscardWorkout = () => {
+    clearInProgressWorkout();
+    setShowResumePrompt(false);
+    setSavedWorkout(null);
+  };
 
   // Navigation handlers
   const handleSelectDeck = (deckType: DeckType) => {
@@ -68,6 +115,7 @@ export function App() {
     const summary = getWorkoutSummary(workout);
     setWorkoutSummary(summary);
     setHistory((prev) => addWorkoutToHistory(prev, summary));
+    clearInProgressWorkout();
     setCurrentScreen('workout-complete');
   };
 
@@ -77,6 +125,7 @@ export function App() {
     const summary = getWorkoutSummary(ended);
     setWorkoutSummary(summary);
     setHistory((prev) => addWorkoutToHistory(prev, summary));
+    clearInProgressWorkout();
     setCurrentScreen('workout-complete');
   };
 
@@ -100,6 +149,7 @@ export function App() {
   const handleClearData = () => {
     if (confirm('Are you sure you want to clear all workout history?')) {
       setHistory(clearHistory(history));
+      clearInProgressWorkout();
     }
   };
 
@@ -163,5 +213,34 @@ export function App() {
     }
   };
 
-  return <div className="app">{renderScreen()}</div>;
+  return (
+    <div className="app">
+      {renderScreen()}
+      
+      {/* Resume Workout Prompt */}
+      {showResumePrompt && savedWorkout && (
+        <div className="resume-prompt-overlay">
+          <div className="resume-prompt">
+            <h2 className="resume-prompt__title">🏋️ Resume Workout?</h2>
+            <p className="resume-prompt__text">
+              You have an unfinished workout from earlier.
+            </p>
+            <div className="resume-prompt__stats">
+              <span>{savedWorkout.completedCards.length}/{savedWorkout.deck.length} cards</span>
+              <span>•</span>
+              <span>{savedWorkout.totalReps} reps</span>
+            </div>
+            <div className="resume-prompt__actions">
+              <button className="resume-prompt__btn resume-prompt__btn--primary" onClick={handleResumeWorkout}>
+                ▶️ Resume
+              </button>
+              <button className="resume-prompt__btn resume-prompt__btn--secondary" onClick={handleDiscardWorkout}>
+                Start Fresh
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+    </div>
+  );
 }
