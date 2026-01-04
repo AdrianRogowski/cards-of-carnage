@@ -7,7 +7,7 @@ import {
   clearHistory,
   loadMoreWorkouts,
 } from '../history';
-import type { WorkoutSummary, WorkoutHistory, AllTimeStats } from '@/types';
+import type { WorkoutSummary, WorkoutHistory } from '@/types';
 
 // Factory for creating test workout summaries
 function createTestWorkout(overrides: Partial<WorkoutSummary> = {}): WorkoutSummary {

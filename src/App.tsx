@@ -7,13 +7,11 @@ import { HistoryScreen } from '@/screens/HistoryScreen';
 import { SettingsScreen } from '@/screens/SettingsScreen';
 import { createWorkout, endWorkoutEarly, getWorkoutSummary } from '@/lib/workout';
 import {
-  createSettings,
   loadSettings,
   saveSettings,
   updateSettings,
 } from '@/lib/settings';
 import {
-  createHistory,
   loadHistory,
   saveHistory,
   addWorkoutToHistory,

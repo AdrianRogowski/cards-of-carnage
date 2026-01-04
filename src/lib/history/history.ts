@@ -93,7 +93,7 @@ export function loadMoreWorkouts(
 /**
  * Clear all history data
  */
-export function clearHistory(history: WorkoutHistory): WorkoutHistory {
+export function clearHistory(_history: WorkoutHistory): WorkoutHistory {
   return createHistory();
 }
 

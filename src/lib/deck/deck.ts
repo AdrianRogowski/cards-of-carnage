@@ -54,8 +54,8 @@ function shuffle<T>(array: T[]): T[] {
  * For decks with more exercises than suits, exercises rotate through card values
  */
 function assignExerciseToCard(
-  suit: Suit,
-  value: CardValue,
+  _suit: Suit,
+  _value: CardValue,
   exercises: Exercise[],
   cardIndex: number
 ): Exercise {

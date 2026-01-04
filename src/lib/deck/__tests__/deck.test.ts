@@ -1,7 +1,7 @@
 import { describe, it, expect } from 'vitest';
-import { createDeck, shuffleDeck, calculateReps } from '../deck';
+import { createDeck, calculateReps } from '../deck';
 import { DECKS } from '../deck-definitions';
-import type { Settings, Card, JokerCard, PlayableCard } from '@/types';
+import type { Settings, Card, JokerCard } from '@/types';
 
 const defaultSettings: Settings = {
   includeJokers: false,
