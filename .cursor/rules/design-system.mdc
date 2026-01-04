@@ -1,0 +1,103 @@
+---
+description: Design system rules for consistent, high-quality UI
+alwaysApply: true
+---
+
+# Design System Rules
+
+**If `.specs/design/design-system.md` exists**, reference it when writing UI code.
+
+**If it doesn't exist yet**, suggest running `/design-init` before implementing UI.
+
+> The design system should be created after initial feature specs but before implementation.
+
+## Core Philosophy (Johnny Ive Principles)
+
+1. **Reduction** — Remove everything that isn't essential
+2. **Clarity** — Every element must be immediately understood
+3. **Deference** — UI recedes, content is the hero
+4. **Depth** — Subtle layers create hierarchy, not decoration
+5. **Physicality** — Cards feel like real objects with weight
+
+## Quick Reference: Design Tokens
+
+### Colors (Dark Theme)
+```css
+/* Backgrounds (darkest to lightest) */
+--color-bg-base:      #0A0A0B;   /* App background */
+--color-bg-elevated:  #141416;   /* Cards */
+--color-bg-surface:   #1C1C1E;   /* Buttons */
+
+/* Text */
+--color-text-primary:   #FFFFFF;   /* Headings */
+--color-text-secondary: #A1A1A6;   /* Body */
+--color-text-tertiary:  #636366;   /* Hints */
+
+/* Accent */
+--color-accent-primary:   #FF3B30;   /* Carnage Red */
+--color-accent-secondary: #FF9500;   /* Fire Orange */
+```
+
+### Spacing (4px base)
+```
+--space-1: 4px    --space-5: 24px
+--space-2: 8px    --space-6: 32px
+--space-3: 12px   --space-7: 48px
+--space-4: 16px   --space-8: 64px
+```
+
+### Typography
+- Hero numbers: 64px, 700 weight
+- Titles: 22-28px, 600 weight
+- Body: 16-18px, 400 weight
+- Captions: 14px, 400 weight
+
+### Animation
+- Fast: 150ms (hover states)
+- Normal: 250ms (standard transitions)
+- Slow: 400ms (card flip)
+- Easing: `cubic-bezier(0.16, 1, 0.3, 1)` — smooth deceleration
+
+## Implementation Rules
+
+### DO:
+- Use CSS custom properties for all values
+- Use semantic token names (not raw colors)
+- Keep touch targets ≥ 44×44px
+- Add visible focus states
+- Respect `prefers-reduced-motion`
+- Use `--radius-md` (12px) for cards
+- Use `--radius-sm` (6px) for buttons
+
+### DON'T:
+- ❌ Use raw color values (`#FF0000`)
+- ❌ Use arbitrary spacing (`padding: 13px`)
+- ❌ Use more than 3 type sizes per screen
+- ❌ Use animations longer than 600ms
+- ❌ Use gradients on backgrounds (solids only)
+- ❌ Use pure white for large surfaces
+
+## When Implementing UI
+
+1. **Before coding**: Read the relevant section of `.specs/design/design-system.md`
+2. **During coding**: Use only defined tokens
+3. **After coding**: Run the `/design-review` command
+
+## File Structure
+
+Create token files before component CSS:
+```
+src/styles/
+├── tokens/         # CSS custom properties
+├── base/           # Reset, global styles
+└── components/     # Component-specific styles
+```
+
+## Checklist for Every Component
+
+Ask yourself:
+- [ ] Am I using design tokens (not hardcoded values)?
+- [ ] Is the spacing from the 4px scale?
+- [ ] Is the color from the semantic palette?
+- [ ] Does animation serve a purpose?
+- [ ] Would Johnny Ive approve?

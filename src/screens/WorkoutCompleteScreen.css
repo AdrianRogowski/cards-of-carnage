@@ -1,0 +1,110 @@
+.workout-complete-screen {
+  text-align: center;
+}
+
+.workout-complete-screen__header {
+  padding: var(--space-6) 0;
+}
+
+.workout-complete-screen__emoji {
+  font-size: 3rem;
+  display: block;
+  margin-bottom: var(--space-3);
+  animation: bounce 0.6s ease-out;
+}
+
+@keyframes bounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.workout-complete-screen__title {
+  font-size: var(--text-title-lg);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-success);
+}
+
+.workout-complete-screen__content {
+  flex: 1;
+}
+
+.workout-complete-screen__hero {
+  margin-bottom: var(--space-6);
+}
+
+.workout-complete-screen__skull {
+  font-size: 3rem;
+  display: block;
+  margin-bottom: var(--space-2);
+}
+
+.workout-complete-screen__subtitle {
+  font-size: var(--text-body);
+  color: var(--color-text-secondary);
+  margin-bottom: var(--space-1);
+}
+
+.workout-complete-screen__brand {
+  font-size: var(--text-title);
+  font-weight: var(--font-weight-bold);
+  letter-spacing: 2px;
+  color: var(--color-text-primary);
+}
+
+.workout-complete-screen__stats-card {
+  background: var(--color-bg-elevated);
+  border-radius: var(--radius-md);
+  padding: var(--space-5);
+  text-align: left;
+}
+
+.workout-complete-screen__stat-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: var(--text-body);
+  color: var(--color-text-secondary);
+  padding: var(--space-2) 0;
+}
+
+.workout-complete-screen__stat-row strong {
+  color: var(--color-text-primary);
+}
+
+.workout-complete-screen__stat-row--highlight {
+  font-size: var(--text-body-lg);
+}
+
+.workout-complete-screen__stat-row--highlight strong {
+  color: var(--color-accent-primary);
+  font-size: var(--text-title);
+}
+
+.workout-complete-screen__divider {
+  height: 1px;
+  background: var(--color-border-subtle);
+  margin: var(--space-4) 0;
+}
+
+.workout-complete-screen__breakdown {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+.workout-complete-screen__breakdown-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: var(--text-caption);
+  color: var(--color-text-tertiary);
+}
+
+.workout-complete-screen__footer {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  padding-top: var(--space-5);
+}

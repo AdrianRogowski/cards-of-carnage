@@ -1,0 +1,189 @@
+.playing-card {
+  aspect-ratio: 2.5 / 3.5;
+  width: 100%;
+  max-width: 280px;
+  background: var(--color-bg-elevated);
+  border: 1px solid var(--color-border-subtle);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-xl);
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: cardReveal var(--duration-slow) var(--ease-out-expo);
+}
+
+@keyframes cardReveal {
+  from {
+    opacity: 0;
+    transform: translateY(20px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* Card Back */
+.playing-card--back {
+  background: linear-gradient(135deg, var(--color-bg-surface) 0%, var(--color-bg-elevated) 100%);
+  border: 2px solid var(--color-border-medium);
+}
+
+.playing-card__back-design {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-1);
+}
+
+.playing-card__back-logo {
+  font-size: 3rem;
+  margin-bottom: var(--space-2);
+}
+
+.playing-card__back-text {
+  font-size: var(--text-caption);
+  font-weight: var(--font-weight-bold);
+  letter-spacing: 2px;
+  color: var(--color-text-tertiary);
+}
+
+/* Colors */
+.playing-card--red {
+  --card-color: var(--color-suit-hearts);
+}
+
+.playing-card--white {
+  --card-color: var(--color-suit-spades);
+}
+
+/* Corners */
+.playing-card__corner {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-weight: var(--font-weight-bold);
+  color: var(--card-color);
+}
+
+.playing-card__corner--top {
+  top: var(--space-3);
+  left: var(--space-3);
+}
+
+.playing-card__corner--bottom {
+  bottom: var(--space-3);
+  right: var(--space-3);
+  transform: rotate(180deg);
+}
+
+.playing-card__value {
+  font-size: var(--text-title);
+  line-height: 1;
+}
+
+.playing-card__suit {
+  font-size: var(--text-body);
+  line-height: 1;
+}
+
+/* Center */
+.playing-card__center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-2);
+  text-align: center;
+  padding: var(--space-4);
+}
+
+.playing-card__center-value {
+  font-size: var(--text-hero);
+  font-weight: var(--font-weight-bold);
+  color: var(--card-color);
+  line-height: 1;
+}
+
+.playing-card__exercise-name {
+  font-size: var(--text-body-lg);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-primary);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* Suit Decorations */
+.playing-card__suit-decoration {
+  position: absolute;
+  font-size: 1.25rem;
+  color: var(--card-color);
+  opacity: 0.3;
+}
+
+.playing-card__suit-decoration--tl {
+  top: var(--space-3);
+  right: var(--space-3);
+}
+
+.playing-card__suit-decoration--tr {
+  top: var(--space-8);
+  left: var(--space-3);
+}
+
+.playing-card__suit-decoration--bl {
+  bottom: var(--space-8);
+  right: var(--space-3);
+}
+
+.playing-card__suit-decoration--br {
+  bottom: var(--space-3);
+  left: var(--space-3);
+}
+
+/* Joker Card */
+.playing-card--joker {
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+  border: 2px solid var(--color-accent-secondary);
+  box-shadow: var(--shadow-xl), 0 0 40px rgba(255, 149, 0, 0.3);
+}
+
+.playing-card__joker-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-2);
+  text-align: center;
+}
+
+.playing-card__joker-icon {
+  font-size: 3rem;
+}
+
+.playing-card__joker-label {
+  font-size: var(--text-title);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-accent-secondary);
+  letter-spacing: 4px;
+}
+
+.playing-card__joker-wildcard {
+  font-size: var(--text-body);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-accent-secondary);
+  padding: var(--space-1) var(--space-3);
+  background: rgba(255, 149, 0, 0.2);
+  border-radius: var(--radius-sm);
+}
+
+.playing-card--joker .playing-card__exercise-name {
+  font-size: var(--text-title);
+  margin-top: var(--space-3);
+}
+
+.playing-card__reps {
+  font-size: var(--text-display);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-primary);
+}

@@ -1,0 +1,28 @@
+.progress-bar {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.progress-bar__track {
+  flex: 1;
+  height: 8px;
+  background: var(--color-bg-surface);
+  border-radius: var(--radius-full);
+  overflow: hidden;
+}
+
+.progress-bar__fill {
+  height: 100%;
+  background: var(--color-accent-primary);
+  border-radius: var(--radius-full);
+  transition: width var(--duration-normal) var(--ease-out);
+}
+
+.progress-bar__label {
+  font-size: var(--text-caption);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-secondary);
+  min-width: 3ch;
+  text-align: right;
+}

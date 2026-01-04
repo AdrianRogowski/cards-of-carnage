@@ -1,0 +1,195 @@
+---
+description: Specs-driven development workflow
+alwaysApply: true
+---
+
+# Specs-Driven Development Workflow
+
+This project uses a specs-driven workflow. The `.specs/` directory contains:
+- `features/` - Gherkin feature specifications (expected behavior)
+- `test-suites/` - Documentation of what each test file covers
+- `design/` - Design system tokens and guidelines
+- `mapping.md` - Links features ↔ tests ↔ components
+
+**Design System**: See `.specs/design/design-system.md` for all UI decisions.
+
+## When Implementing New Features (TDD Flow)
+
+Follow this strict order:
+
+### 1. SPEC → Create feature specification
+- Check existing specs in `.specs/features/` for related context
+- Create the feature spec with Gherkin scenarios BEFORE coding
+- **Include ASCII mockups** for UI components showing layout and visual structure
+- Wait for user approval before proceeding
+
+### 2. TEST → Write failing tests
+- Write tests that cover ALL Gherkin scenarios from the spec
+- Tests should FAIL initially (no implementation yet)
+- Document tests in `.specs/test-suites/`
+- Update `.specs/mapping.md`
+
+### 3. IMPLEMENT → Code until tests pass
+- Implement the feature incrementally
+- **For UI**: Reference `.specs/design/design-system.md` for all styling
+- Run tests frequently
+- Loop: implement → run tests → fix → repeat
+- Run `/design-review` on UI components
+- Done when ALL tests pass AND design system is followed
+
+### Loop Cycle
+```
+┌─────────┐     ┌─────────┐     ┌─────────────┐
+│  SPEC   │ ──▶ │  TEST   │ ──▶ │ IMPLEMENT   │
+│ (plan)  │     │ (fail)  │     │ (loop until │
+└─────────┘     └─────────┘     │ tests pass) │
+                                └─────────────┘
+```
+
+## When Modifying Existing Features
+
+1. Read the relevant feature spec in `.specs/features/`
+2. Read the test suite doc in `.specs/test-suites/`
+3. Update the feature spec if behavior changes
+4. Update code and tests
+5. Update test suite doc with changes
+
+## When Fixing Bugs
+
+1. Check if there's a spec defining expected behavior
+2. If the bug reveals a gap in specs, add the scenario
+3. Write a failing test that reproduces the bug
+4. Fix the bug
+5. Document the new test
+
+## Pause Triggers
+
+If the user says any of these (or similar), create the spec and STOP - wait for approval:
+- "let me review first"
+- "write the spec first"
+- "show me the Gherkin"
+- "spec this out"
+- "don't implement yet"
+- "plan this first"
+- "what would this look like?"
+- "before you implement..."
+- "hold on"
+- "wait"
+- "let me see"
+
+After showing the spec, ask: "Does this look right? Ready to write tests?"
+
+After tests are written (and failing), ask: "Tests written. Ready to implement?"
+
+## File Locations
+
+- Feature specs: `.specs/features/{domain}/{feature}.feature.md`
+- Test suite docs: `.specs/test-suites/{mirrors your test directory structure}`
+- Mapping: `.specs/mapping.md`
+
+## ASCII Mockups in Specs
+
+For UI components and features, **always include ASCII mockups** to visualize:
+- Layout structure and component hierarchy
+- Different states (collapsed, expanded, loading, error, empty)
+- Interactive elements and their positions
+- Responsive breakpoints if relevant
+
+### ASCII Mockup Format
+
+Place mockups in a dedicated `## Mockups` section after `## User Stories`:
+
+```
+## Mockups
+
+### Default State
+┌─────────────────────────────────────────────┐
+│ [Logo]  Title                    [User ▼]   │
+├─────────────────────────────────────────────┤
+│  Tab 1  │  Tab 2  │  Tab 3  │  Tab 4       │
+└─────────────────────────────────────────────┘
+
+### Expanded State
+┌─────────────────────────────────────────────┐
+│ ...                                         │
+└─────────────────────────────────────────────┘
+```
+
+### ASCII Mockup Conventions
+
+| Symbol | Meaning |
+|--------|---------|
+| `┌┐└┘│─` | Box drawing for containers |
+| `[...]` | Buttons, clickable elements |
+| `(...)` | Radio buttons, selections |
+| `[x] [ ]` | Checkboxes |
+| `<...>` | Input fields |
+| `▼ ▶` | Dropdowns, expandable sections |
+| `...` | Truncated/variable content |
+| `───` | Dividers, separators |
+| `≡` | Menu/hamburger icon |
+| `⋮` | More options menu |
+| `×` | Close button |
+| `+` | Add button |
+| `🔍 📅 ⚙️` | Icons (use sparingly) |
+
+## Test ID Conventions
+
+When documenting tests, use prefixes for component/module names. Create a 2-3 letter prefix for each component/module you test.
+
+Example prefixes (customize for your project):
+| Prefix | Component/Module |
+|--------|------------------|
+| UT | utils |
+| API | api handlers |
+| SVC | services |
+
+New components/modules should get a 2-3 letter prefix.
+
+## Available Slash Commands
+
+Use these commands to work efficiently with the specs-driven workflow:
+
+### Core Workflow Commands
+
+| Command | Purpose |
+|---------|---------|
+| `/spec-first` | Create feature spec without implementing (TDD planning mode) |
+| `/document-code` | Generate specs/tests from existing code (reverse TDD) |
+| `/prototype` | Rapid prototyping without specs/tests |
+| `/formalize` | Convert prototype to production code with full specs |
+
+### Bug Fixing & Refactoring
+
+| Command | Purpose |
+|---------|---------|
+| `/fix-bug` | Investigate and fix bugs with regression tests |
+| `/refactor` | Refactor code while ensuring tests still pass |
+
+### Documentation & Maintenance
+
+| Command | Purpose |
+|---------|---------|
+| `/check-coverage` | Compare specs against tests to find gaps |
+| `/update-test-docs` | Sync test documentation with actual tests |
+| `/catch-drift` | Detect and reconcile spec ↔ code drift |
+| `/verify-test-counts` | Run tests and reconcile counts vs documentation |
+
+### Setup & Git Workflow
+
+| Command | Purpose |
+|---------|---------|
+| `/spec-init` | Bootstrap spec-driven workflow on existing project |
+| `/design-init` | Create project design system (run once, after first specs) |
+| `/start-feature` | Sync with main branch and create new feature branch |
+| `/code-review` | Review code against senior engineering standards |
+| `/design-review` | Audit UI against design system tokens |
+
+## Always Mention
+
+When working with specs, always tell the user:
+- Which spec files you're reading
+- Which spec files you're creating/updating
+- Any gaps between specs and tests
+
+This helps the user track documentation changes.
