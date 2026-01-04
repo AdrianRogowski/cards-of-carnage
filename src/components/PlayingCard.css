@@ -1,11 +1,11 @@
 .playing-card {
   aspect-ratio: 2.5 / 3.5;
   width: 100%;
-  max-width: 280px;
+  max-width: 200px;
   background: var(--color-bg-elevated);
   border: 1px solid var(--color-border-subtle);
   border-radius: var(--radius-md);
-  box-shadow: var(--shadow-xl);
+  box-shadow: var(--shadow-lg);
   position: relative;
   display: flex;
   align-items: center;
@@ -100,46 +100,18 @@
 }
 
 .playing-card__center-value {
-  font-size: var(--text-hero);
+  font-size: var(--text-display);
   font-weight: var(--font-weight-bold);
   color: var(--card-color);
   line-height: 1;
 }
 
 .playing-card__exercise-name {
-  font-size: var(--text-body-lg);
+  font-size: var(--text-body);
   font-weight: var(--font-weight-semibold);
   color: var(--color-text-primary);
   text-transform: uppercase;
   letter-spacing: 1px;
-}
-
-/* Suit Decorations */
-.playing-card__suit-decoration {
-  position: absolute;
-  font-size: 1.25rem;
-  color: var(--card-color);
-  opacity: 0.3;
-}
-
-.playing-card__suit-decoration--tl {
-  top: var(--space-3);
-  right: var(--space-3);
-}
-
-.playing-card__suit-decoration--tr {
-  top: var(--space-8);
-  left: var(--space-3);
-}
-
-.playing-card__suit-decoration--bl {
-  bottom: var(--space-8);
-  right: var(--space-3);
-}
-
-.playing-card__suit-decoration--br {
-  bottom: var(--space-3);
-  left: var(--space-3);
 }
 
 /* Joker Card */

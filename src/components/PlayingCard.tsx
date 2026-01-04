@@ -76,19 +76,6 @@ export function PlayingCard({ card, isRevealed = true }: PlayingCardProps) {
         <span className="playing-card__value">{valueDisplay}</span>
         <span className="playing-card__suit">{suitSymbol}</span>
       </div>
-
-      <div className="playing-card__suit-decoration playing-card__suit-decoration--tl">
-        {suitSymbol}
-      </div>
-      <div className="playing-card__suit-decoration playing-card__suit-decoration--tr">
-        {suitSymbol}
-      </div>
-      <div className="playing-card__suit-decoration playing-card__suit-decoration--bl">
-        {suitSymbol}
-      </div>
-      <div className="playing-card__suit-decoration playing-card__suit-decoration--br">
-        {suitSymbol}
-      </div>
     </div>
   );
 }
