@@ -1,7 +1,7 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { DECKS } from '@/lib/deck';
 import { getCurrentCard, getProgress, completeCard } from '@/lib/workout';
-import { Header } from '@/components/Header';
+import { formatElapsedTime } from '@/lib/time';
 import { Button } from '@/components/Button';
 import { PlayingCard } from '@/components/PlayingCard';
 import { ProgressBar } from '@/components/ProgressBar';
@@ -24,10 +24,31 @@ export function WorkoutScreen({
 }: WorkoutScreenProps) {
   const [showPauseModal, setShowPauseModal] = useState(false);
   const [showInstructions, setShowInstructions] = useState(false);
+  const [elapsedTime, setElapsedTime] = useState(0);
 
   const deck = DECKS[workout.deckType];
   const currentCard = getCurrentCard(workout);
   const progress = getProgress(workout);
+
+  // Timer effect - updates every second
+  useEffect(() => {
+    const updateTimer = () => {
+      const now = Date.now();
+      const start = workout.startTime instanceof Date 
+        ? workout.startTime.getTime() 
+        : new Date(workout.startTime).getTime();
+      setElapsedTime(now - start);
+    };
+
+    // Initial update
+    updateTimer();
+
+    // Only tick when modal is closed
+    if (!showPauseModal) {
+      const interval = setInterval(updateTimer, 1000);
+      return () => clearInterval(interval);
+    }
+  }, [workout.startTime, showPauseModal]);
 
   const handleCompleteCard = () => {
     const updated = completeCard(workout);
@@ -42,15 +63,29 @@ export function WorkoutScreen({
 
   return (
     <div className="screen workout-screen">
-      <Header
-        title={deck.name}
-        leftAction={{ label: '✕ End', onClick: () => setShowPauseModal(true) }}
-        rightContent={
-          <span className="workout-screen__card-count">
-            {progress.current}/{progress.total} 🃏
-          </span>
-        }
-      />
+      <header className="workout-header">
+        <button
+          className="exit-button"
+          onClick={() => setShowPauseModal(true)}
+          aria-label="End workout"
+          data-testid="exit-button"
+        >
+          ×
+        </button>
+        <time 
+          className="workout-timer"
+          data-testid="workout-timer"
+        >
+          {formatElapsedTime(elapsedTime)}
+        </time>
+        <span className="workout-screen__card-count">
+          {progress.current}/{progress.total} 🃏
+        </span>
+      </header>
+
+      <div className="workout-screen__deck-name" data-testid="deck-name">
+        {deck.name}
+      </div>
 
       <div className="workout-screen__content">
         {currentCard && (
