@@ -27,6 +27,8 @@ This document maps feature specifications to their corresponding tests and imple
 | History | `features/core/cards-of-carnage.feature.md` | `src/lib/history/__tests__/history.test.ts` | `src/lib/history/` |
 | Settings | `features/core/cards-of-carnage.feature.md` | `src/lib/settings/__tests__/settings.test.ts` | `src/lib/settings/` |
 | Card Logic | `features/core/cards-of-carnage.feature.md` | `src/lib/deck/__tests__/deck.test.ts` | `src/lib/deck/` |
+| Workout Timer | `features/core/workout-timer-nav.feature.md` | `src/lib/time/__tests__/time.test.ts`, `src/screens/__tests__/WorkoutScreen.test.tsx` | `src/lib/time/`, `src/screens/WorkoutScreen.tsx` |
+| Exit Navigation | `features/core/workout-timer-nav.feature.md` | `src/screens/__tests__/WorkoutScreen.test.tsx` | `src/screens/WorkoutScreen.tsx` |
 
 ---
 
@@ -38,7 +40,9 @@ This document maps feature specifications to their corresponding tests and imple
 | `workout.test.ts` | 15 | 🧪 Written |
 | `history.test.ts` | 12 | 🧪 Written |
 | `settings.test.ts` | 14 | 🧪 Written |
-| **Total** | **55** | **Failing (TDD)** |
+| `time.test.ts` | 6 | 🧪 Written |
+| `WorkoutScreen.test.tsx` | 12 | 🧪 Written |
+| **Total** | **73** | **Failing (TDD)** |
 
 ---
 
@@ -50,7 +54,10 @@ This document maps feature specifications to their corresponding tests and imple
 | WRK | Workout flow |
 | HIST | History & stats |
 | SET | Settings |
-| UI | UI components |
+| TMR | Time formatting utility |
+| UI-TMR | Timer UI component |
+| UI-NAV | Navigation UI component |
+| UI | UI components (general) |
 
 ---
 
@@ -74,6 +81,8 @@ This document maps feature specifications to their corresponding tests and imple
 | Workout History | 📝 | 🧪 HIST-001 to HIST-006 | - |
 | Settings | 📝 | 🧪 SET-001 to SET-006 | - |
 | Card Distribution | 📝 | 🧪 (in DECK tests) | - |
+| Workout Timer | 📝 | 🧪 TMR-001 to TMR-006, UI-TMR-001 to UI-TMR-005 | - |
+| Exit Navigation | 📝 | 🧪 UI-NAV-001 to UI-NAV-007 | - |
 
 ---
 
